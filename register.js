@@ -14,16 +14,15 @@ document.getElementById("registerForm").addEventListener("submit", async functio
   localStorage.setItem("gender", gender);
 
   try {
-   const res = await fetch("https://stream-zone-olive.vercel.app/api/register", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ name, email, password, gender })
-});
+    const res = await fetch("https://stream-zone-olive.vercel.app/api/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email, password, gender })
+    });
 
+    const result = await res.json();  // 👈 fixed from response.json()
 
-    const result = await response.json();
-
-    if (!response.ok) {
+    if (!res.ok) {  // 👈 fixed from response.ok
       alert(result.error || "Registration failed");
       return;
     }
