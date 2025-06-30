@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Coming Soon</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to bottom, #1e1b4b, #4c1d95, #2e1065);
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      color: white;
+      text-align: center;
+    }
+
+    h1 {
+      font-family: 'Pacifico', cursive;
+      font-size: 5rem;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1.5rem;
+      opacity: 0.85;
+    }
+
+    .content {
+      z-index: 10;
+    }
+
+    .buttons {
+      margin-top: 2rem;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .buttons button {
+      background: white;
+      color: #4c1d95;
+      border: none;
+      padding: 12px 24px;
+      font-size: 1rem;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+
+    .buttons button:hover {
+      background: #ddd6fe;
+    }
+
+    /* Clouds */
+    .cloud {
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.7;
+    }
+
+    .cloud::before,
+    .cloud::after {
+      content: '';
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+    }
+
+    .cloud1 {
+      width: 160px;
+      height: 80px;
+      top: 20%;
+      left: -200px;
+      animation: moveRight 40s linear infinite;
+    }
+
+    .cloud2 {
+      width: 200px;
+      height: 90px;
+      top: 40%;
+      right: -250px;
+      animation: moveLeft 45s linear infinite;
+    }
+
+    .cloud3 {
+      width: 220px;
+      height: 100px;
+      top: 65%;
+      left: -300px;
+      animation: moveRight 50s linear infinite;
+    }
+
+    .cloud4 {
+      width: 180px;
+      height: 85px;
+      bottom: 10%;
+      right: -300px;
+      animation: moveLeft 65s linear infinite;
+    }
+
+    .cloud::before {
+      width: 80px;
+      height: 80px;
+      top: -40px;
+      left: 30px;
+    }
+
+    .cloud::after {
+      width: 100px;
+      height: 100px;
+      top: -30px;
+      left: 70px;
+    }
+
+    @keyframes moveRight {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(160vw); }
+    }
+
+    @keyframes moveLeft {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-160vw); }
+    }
+
+    .star {
+      width: 4px;
+      height: 4px;
+      background: white;
+      border-radius: 50%;
+      position: absolute;
+      animation: twinkle 2s infinite ease-in-out alternate,
+                 float 10s infinite linear alternate;
+    }
+
+    @keyframes twinkle {
+      0% { opacity: 0.3; transform: scale(1); }
+      100% { opacity: 1; transform: scale(1.4); }
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      100% { transform: translateY(-10px); }
+    }
+
+    /* Contact form modal */
+    .form-backdrop {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(5px);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 100;
+    }
+
+    .contact-form {
+      background: white;
+      color: black;
+      padding: 2rem;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.6);
+      position: relative;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 0.5rem 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+
+    .contact-form button {
+      background: #4c1d95;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      font-size: 1.4rem;
+      position: absolute;
+      top: 8px;
+      right: 12px;
+      cursor: pointer;
+      color: #4c1d95;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Stars -->
+  <div class="star" style="top: 10%; left: 20%;"></div>
+  <div class="star" style="top: 15%; left: 50%;"></div>
+  <div class="star" style="top: 5%; left: 80%;"></div>
+  <div class="star" style="top: 25%; left: 35%;"></div>
+  <div class="star" style="top: 30%; left: 70%;"></div>
+
+  <!-- Clouds -->
+  <div class="cloud cloud1"></div>
+  <div class="cloud cloud2"></div>
+  <div class="cloud cloud3"></div>
+  <div class="cloud cloud4"></div>
+
+  <!-- Main Content -->
+  <div class="content">
+    <h1>Soon</h1>
+    <p>Something magical is on the way...</p>
+
+    <div class="buttons">
+      <button onclick="openForm()">Contact Us</button>
+      <button onclick="location.href='register.html'">Register</button>
+      <button onclick="location.href='login.html'">Login</button>
+    </div>
+  </div>
+
+  <!-- Contact Form Modal -->
+  <div class="form-backdrop" id="formBackdrop">
+    <div class="contact-form">
+      <button class="close-btn" onclick="closeForm()">×</button>
+      <h2>Contact Us</h2>
+      <form id="contactForm" action="https://formspree.io/f/xyzabcd" method="POST">
+  <input type="text" name="name" placeholder="Your Name" required />
+  <input type="email" name="email" placeholder="Your Email" required />
+  <textarea name="message" rows="4" placeholder="Your Message" required></textarea>
+  <button type="submit">Send</button>
+</form>
+
+    </div>
+  </div>
+
+  <!-- JS to handle modal and form -->
+  <script>
+    function openForm() {
+      document.getElementById('formBackdrop').style.display = 'flex';
+    }
+
+    function closeForm() {
+      document.getElementById('formBackdrop').style.display = 'none';
+    }
+
+    document.getElementById('contactForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const form = e.target;
+      const data = new FormData(form);
+      fetch(form.action, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      }).then(response => {
+        alert("Thank you! Your message was sent.");
+        form.reset();
+        closeForm();
+      }).catch(error => {
+        alert("Oops! Something went wrong.");
+      });
+    });
+  </script>
+</body>
+</html>

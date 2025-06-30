@@ -1,0 +1,123 @@
+/* ===== Base Layout ===== */
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(to bottom, #0f0f1a, #1e1b4b);
+  color: white;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* ===== Clouds ===== */
+.cloud {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.05;
+  z-index: -1;
+  filter: blur(70px);
+}
+
+.cloud::before,
+.cloud::after {
+  content: '';
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+}
+
+.cloud1 {
+  width: 160px;
+  height: 80px;
+  top: 20%;
+  left: -200px;
+  animation: moveRight 40s linear infinite;
+}
+.cloud2 {
+  width: 200px;
+  height: 90px;
+  top: 40%;
+  right: -250px;
+  animation: moveLeft 45s linear infinite;
+}
+.cloud3 {
+  width: 220px;
+  height: 100px;
+  top: 65%;
+  left: -300px;
+  animation: moveRight 50s linear infinite;
+}
+.cloud4 {
+  width: 180px;
+  height: 85px;
+  bottom: 10%;
+  right: -300px;
+  animation: moveLeft 65s linear infinite;
+}
+
+.cloud::before {
+  width: 80px;
+  height: 80px;
+  top: -40px;
+  left: 30px;
+}
+
+.cloud::after {
+  width: 100px;
+  height: 100px;
+  top: -30px;
+  left: 70px;
+}
+
+@keyframes moveRight {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(160vw); }
+}
+@keyframes moveLeft {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-160vw); }
+}
+
+/* ===== Page Header ===== */
+header, h1, h2 {
+  color: #a855f7; /* purple StreamZone look */
+  text-align: center;
+  margin-top: 20px;
+  font-size: 2.4rem;
+}
+
+/* ===== Category Section ===== */
+.category {
+  padding: 2rem;
+}
+
+/* ===== Video Tiles ===== */
+.video-tile {
+  display: inline-block;
+  width: 200px;
+  margin: 10px;
+  border-radius: 20px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.video-tile:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 30px rgba(168, 85, 247, 0.5);
+}
+
+.video-tile img {
+  width: 100%;
+  height: auto;
+  border-bottom: 2px solid rgba(255,255,255,0.1);
+}
+
+/* ===== Rating Overlay ===== */
+.rating-overlay {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: rgba(0,0,0,0.6);
+  padd

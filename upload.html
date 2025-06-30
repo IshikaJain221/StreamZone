@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Upload | StreamZone</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body {
+      background: #0d0b2e;
+      color: white;
+      font-family: Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .upload-container {
+      background: #1c1a40;
+      padding: 30px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 500px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="file"],
+    button {
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+      font-size: 1rem;
+    }
+
+    input[type="text"],
+    input[type="file"] {
+      background: #f5f5f5;
+      color: #000;
+    }
+
+    button {
+      background-color: #6a5acd;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: #5a4acb;
+    }
+  </style>
+</head>
+<body>
+  <div class="upload-container">
+    <h2>Admin: Upload New Video</h2>
+
+  </div>
+
+<script>
+  if (localStorage.getItem("isAdmin") !== "true") {
+    alert("Access Denied. Admins only.");
+    window.location.href = "admin-login.html";
+  }
+</script>
+
+  <script>
+    // Optional JS validation or feedback
+document.getElementById("uploadForm").addEventListener("submit", async function (e) {
+  e.preventDefault();
+
+  const formData = new FormData();
+  formData.append("title", document.getElementById("title").value);
+  formData.append("genre", document.getElementById("genre").value);
+  formData.append("video", document.getElementById("videoFile").files[0]);
+  formData.append("thumbnail", document.getElementById("thumbnailFile").files[0]);
+
+  try {
+    const response = await fetch("http://localhost:3000/api/upload", {
+      method: "POST",
+      body: formData
+    });
+
+    const result = await response.json();
+    if (response.ok) {
+      alert("🎉 Video uploaded successfully!");
+    } else {
+      alert("❌ Upload failed: " + result.error);
+    }
+  } catch (err) {
+    alert("⚠️ Error uploading video.");
+    console.error(err);
+  }
+});
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User Profile</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    #historyList {
+      list-style: none;
+      padding-left: 0;
+      color: white;
+    }
+
+    #clearHistoryBtn {
+      background-color: #a855f7;
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      font-size: 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-bottom: 10px;
+      float: right;
+      transition: background 0.3s ease;
+    }
+
+    #clearHistoryBtn:hover {
+      background-color: #9333ea;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="profile-container" id="profile">
+    <h2>Welcome, <span id="userName">User</span></h2>
+    <img id="avatar" src="" alt="Avatar" width="100" />
+  </div>
+
+  <section id="watch-history-section">
+    <h3>Your Watch History</h3>
+    <button id="clearHistoryBtn">🗑️ Clear History</button>
+    <div id="watchHistory"></div>
+  </section>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const email = localStorage.getItem("userEmail");
+      const gender = localStorage.getItem("gender");
+      const name = localStorage.getItem("userName") || "User";
+
+      // Set avatar
+      document.getElementById("avatar").src = 
+        gender === "female" ? "assets/icons/girl.svg" : "assets/icons/male.svg";
+
+      // Set name
+      document.getElementById("userName").textContent = name;
+
+      // Render history
+      const historyList = document.getElementById("watchHistory");
+      const key = `watchHistory_${email}`;
+      const history = JSON.parse(localStorage.getItem(key)) || [];
+
+      historyList.innerHTML = "";
+
+      if (history.length === 0) {
+        historyList.innerHTML = "<p>No videos watched yet.</p>";
+      } else {
+        history.forEach((video) => {
+          const item = document.createElement("div");
+          item.classList.add("history-item");
+          item.innerHTML = `<strong>${video.title}</strong> - ${video.views}`;
+          historyList.appendChild(item);
+        });
+      }
+
+      // Clear button
+      const clearBtn = document.getElementById("clearHistoryBtn");
+      clearBtn.addEventListener("click", () => {
+        localStorage.removeItem(key);
+        historyList.innerHTML = "<p>History cleared.</p>";
+        alert("✅ Watch history cleared!");
+      });
+
+      // Fetch name from backend (optional)
+      if (email) {
+        fetch(`http://localhost:3000/api/profile/${email}`)
+          .then(res => res.json())
+          .then(user => {
+            if (user?.name) {
+              document.getElementById("userName").textContent = user.name;
+            }
+          });
+      }
+    });
+  </script>
+</body>
+</html>

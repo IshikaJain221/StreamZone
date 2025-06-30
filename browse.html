@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Browse - StreamZone</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<style>#historyHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 20px 10px 20px;
+}
+
+#clearHistoryBtn {
+  background-color: #a855f7;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  font-size: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+#clearHistoryBtn:hover {
+  background-color: #9333ea;
+}
+</style>
+<body>
+  <!-- CLOUD OVERLAYS -->
+<div class="cloud"></div>
+<div class="cloud"></div>
+<div class="cloud"></div>
+
+
+
+  <!-- Header with logo, search bar, and profile -->
+ <header>
+  <h1>StreamZone</h1>
+
+  <!-- 🔍 Search Bar with SVG icon -->
+  <div class="search-bar">
+    <img src="assets/icons/search.svg" alt="Search" class="search-icon" />
+    <input type="text" id="search" placeholder="Search titles..." />
+  </div>
+
+  <!-- Profile with avatar -->
+  <div class="profile-section">
+    <a href="profile.html" class="profile-link">Profile</a>
+    <a href="profile.html" title="View Profile">
+      <img id="avatar" alt="Profile Avatar" class="profile-avatar" />
+    </a>
+  </div>
+</header>
+
+  <!-- Dropdown to navigate genres -->
+  <div class="dropdown-wrapper">
+    <label for="genreDropdown">Jump to Category:</label>
+    <select id="genreDropdown" class="genre-dropdown">
+      <option value="">Select</option>
+      <option value="Trending">Trending</option>
+      <option value="Drama">Drama</option>
+      <option value="Meditation">Meditation</option>
+      <option value="Comedy">Comedy</option>
+      <option value="Horror">Horror</option>
+      <option value="Nature">Nature</option>
+    </select>
+  </div>
+
+  <!-- Category sections -->
+  <section class="category" id="Trending">
+    <h2>Trending</h2>
+    <div class="video-row" id="trending"></div>
+  </section>
+
+  <section class="category" id="Drama">
+    <h2>Drama</h2>
+    <div class="video-row" id="drama"></div>
+  </section>
+
+  <section class="category" id="Meditation">
+    <h2>Meditation</h2>
+    <div class="video-row" id="meditation"></div>
+  </section>
+
+  <section class="category" id="Comedy">
+    <h2>Comedy</h2>
+    <div class="video-row" id="comedy"></div>
+  </section>
+
+  <section class="category" id="Horror">
+    <h2>Horror</h2>
+    <div class="video-row" id="horror"></div>
+  </section>
+
+  <section class="category" id="Nature">
+    <h2>Nature</h2>
+    <div class="video-row" id="nature"></div>
+  </section>
+
+  <section class="category" id="History">
+  <div id="historyHeader">
+    <h2>Watch History</h2>
+    <button id="clearHistoryBtn">🗑️ Clear History</button>
+  </div>
+  <div class="video-row" id="historyContainer"></div>
+</section>
+
+
+  <script src="browse.js"></script>
+  <script>
+    // Load gender-based avatar
+    const gender = localStorage.getItem("gender");
+    const avatar = document.getElementById("avatar");
+    if (avatar) {
+      avatar.src = gender === "male" ? "assets/icons/male.svg" : "assets/icons/girl.svg";
+
+    }
+    
+  </script>
+</body>
+</html>
