@@ -14,13 +14,12 @@ document.getElementById("registerForm").addEventListener("submit", async functio
   localStorage.setItem("gender", gender);
 
   try {
-    const response = await fetch("https://your-backend-url.onrender.com/api/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ name, email, password, gender })
-    });
+   const res = await fetch("https://stream-zone-olive.vercel.app/api/register", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ name, email, password, gender })
+});
+
 
     const result = await response.json();
 
